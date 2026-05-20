@@ -1,0 +1,31 @@
+Information About the Database Project Description
+This document provides information about the structure of a database project description. The table below presents the main required parts of the description. All listed parts must be included.
+1. Introduction
+A summary is provided. The objectives and tasks of the project are defined. The objective must be clearly stated and achievable. Tasks are the steps that must be completed to achieve the objective. Length: 1–2 pages.
+2. Description of the Application Domain
+The current situation is described, and the main problem is identified. A brief review of similar systems must be provided. The main functionality must be highlighted. It must be clearly stated how the proposed system will differ from existing ones. Generative artificial intelligence may be used to define future functionality. If AI is used, the prompt text must be included in the appendices. Length: 2–3 pages.
+3. System Users
+At least two users and their functionality must be described. If the project is carried out by a team, at least four different users must be defined. Length: 1–3 pages.
+4. ER Model
+Entities, attributes, and relationships must be represented. Note that the ER model is not yet tied to a specific database management system. Unique fields must be specified. At least 15 entities are required. The tool for creating the ER model is chosen by the student. The model must be clearly presented and may be split into multiple diagrams if needed. The Sakila database model may be used as an example. A short description (2–5 sentences) must be provided for each entity. Length: 1–3 pages.
+5. Normalization
+Normalization up to the third normal form (3NF) must be performed. The final diagram must be provided and be clearly readable. If a table does not meet 3NF, a description of the steps taken to resolve the issue must be included. The tool used to create the diagram is chosen by the student. Length: 2–3 pages.
+6. Database Implementation
+The database tables must be physically created. A diagram must be provided along with an SQL file that can be used to recreate the database on another computer. Length: 2–3 pages.
+7. Data Entry
+Each table must contain data entered in several ways: a visual interface, SQL commands, and data transfer from one table to another. Each method must include 10 records. Additionally, an AI tool must be used to generate meaningful data, with at least 100 records generated for each table. The prompt used for data generation must be provided, along with identified issues encountered during data generation. Length: 2–5 pages.
+8. Queries
+Queries must be created in stages and derived from functional requirements. Part 1 consists of basic queries; at least 3 meaningful queries must be created. Part 2 includes queries using the SUBSTRING function: 5 queries (2 text-based, 3 date/time-based). Part 3 includes queries using MySQL JOINs: at least 12 queries (6 joining two tables and 6 joining more than two tables). Part 4 consists of complex queries (subqueries), with at least 10 queries. In total, 30 queries must be created. Part 5 requires the creation of one meaningful trigger. Length: 10–15 pages.
+9. Software Implementation
+This section must describe the software implementation files and their purpose. A description of classes and their methods is provided, including actions performed, input data, and output structure. Other software constructs such as components, modules, and their interactions may also be described. Length: 1–3 pages.
+10. User Manual
+This section must include: software dependencies; hardware environment used for development and testing; detailed installation instructions; description of a typical configuration (if applicable); detailed launch instructions (especially for mobile apps, websites, or online services); uninstallation steps; and a clear description of 3–5 usage steps. Length: 3–5 pages.
+11. Conclusions and Recommendations
+Conclusions must be presented in relation to the defined tasks. At least three recommendations for future improvements must be provided.
+12. Information Sources
+At least five sources must be provided, such as books, video materials, or other relevant resources.
+13. Appendix 1
+Five main processes must be identified. Artificial intelligence may be used to visualize the processes, and the prompt used must be provided. Steps required to achieve the goal must be described. The Sakila database process descriptions may be used as an example.
+14. Appendix 2
+The data entry procedure must be described in a clear and logical manner. Information about the user responsible for data entry may be included. The procedure must be written so that any user could follow it. AI may be used at this stage, in which case the prompt must be provided.
+Note: The project description must be prepared in accordance with the General Requirements for Academic Written Works (2023) approved by the Dean of the Faculty of Electronics and Informatics.

@@ -1,0 +1,156 @@
+// DBML (Database Markup Language) for DeshiMula Database Schema
+// Copy and paste this code into https://dbdiagram.io to generate the interactive ERD.
+
+Table users {
+  id integer [primary key, increment]
+  name text [not null]
+  email text [unique, not null]
+  password text [not null]
+  role text [default: 'user']
+  created_at datetime [default: `CURRENT_TIMESTAMP`]
+}
+
+Table industries {
+  id integer [primary key, increment]
+  name text [unique, not null]
+}
+
+Table companies {
+  id integer [primary key, increment]
+  name text [not null]
+  slug text [unique, not null]
+  description text
+  website text
+  logo_url text
+  avg_rating real [default: 0]
+  total_reviews integer [default: 0]
+  created_at datetime [default: `CURRENT_TIMESTAMP`]
+}
+
+Table company_industries {
+  company_id integer
+  industry_id integer
+
+  indexes {
+    (company_id, industry_id) [pk]
+  }
+}
+
+Table review_sentiments {
+  id integer [primary key, increment]
+  name text [unique, not null]
+}
+
+Table reviews {
+  id integer [primary key, increment]
+  guid text
+  title text [not null]
+  content text [not null]
+  company_id integer
+  user_id integer
+  sentiment_id integer
+  upvotes integer [default: 0]
+  downvotes integer [default: 0]
+  created_at datetime [default: `CURRENT_TIMESTAMP`]
+}
+
+Table votes {
+  id integer [primary key, increment]
+  review_id integer
+  user_id integer
+  vote_type text
+  created_at datetime [default: `CURRENT_TIMESTAMP`]
+
+  indexes {
+    (review_id, user_id) [unique]
+  }
+}
+
+Table comments {
+  id integer [primary key, increment]
+  review_id integer
+  user_id integer
+  content text [not null]
+  created_at datetime [default: `CURRENT_TIMESTAMP`]
+}
+
+Table tags {
+  id integer [primary key, increment]
+  name text [unique, not null]
+}
+
+Table review_tags {
+  review_id integer
+  tag_id integer
+
+  indexes {
+    (review_id, tag_id) [pk]
+  }
+}
+
+Table reports {
+  id integer [primary key, increment]
+  review_id integer
+  user_id integer
+  reason text
+  status text [default: 'pending']
+  created_at datetime [default: `CURRENT_TIMESTAMP`]
+}
+
+Table company_locations {
+  id integer [primary key, increment]
+  name text [unique, not null]
+}
+
+Table company_location_junction {
+  company_id integer
+  location_id integer
+
+  indexes {
+    (company_id, location_id) [pk]
+  }
+}
+
+Table notifications {
+  id integer [primary key, increment]
+  user_id integer
+  message text
+  is_read boolean [default: 0]
+  created_at datetime [default: `CURRENT_TIMESTAMP`]
+}
+
+Table audit_logs {
+  id integer [primary key, increment]
+  user_id integer
+  action text
+  entity_type text
+  entity_id integer
+  details text
+  created_at datetime [default: `CURRENT_TIMESTAMP`]
+}
+
+// Relationships
+Ref: company_industries.company_id > companies.id
+Ref: company_industries.industry_id > industries.id
+
+Ref: reviews.company_id > companies.id
+Ref: reviews.user_id > users.id
+Ref: reviews.sentiment_id > review_sentiments.id
+
+Ref: votes.review_id > reviews.id
+Ref: votes.user_id > users.id
+
+Ref: comments.review_id > reviews.id
+Ref: comments.user_id > users.id
+
+Ref: review_tags.review_id > reviews.id
+Ref: review_tags.tag_id > tags.id
+
+Ref: reports.review_id > reviews.id
+Ref: reports.user_id > users.id
+
+Ref: company_location_junction.company_id > companies.id
+Ref: company_location_junction.location_id > company_locations.id
+
+Ref: notifications.user_id > users.id
+Ref: audit_logs.user_id > users.id

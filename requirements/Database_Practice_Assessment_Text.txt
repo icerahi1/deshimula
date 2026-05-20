@@ -1,0 +1,23 @@
+Information About Database Practice Assessment
+This document provides information about the database practice assessment. It outlines the evaluation components and scoring criteria used to assess student work.
+No.
+Title
+Points
+Notes
+1
+Description
+3
+The description is submitted as a text document. It must comply with established academic writing and documentation rules. The minimum length of the description is 30 pages. If there are appendices (images, diagrams, etc.), they must be submitted as separate files. The description must be written in correct and formal Lithuanian (state) language.
+2
+Queries and Trigger
+3
+At least 30 different and meaningful queries are required. All queries must return results. A table must be created where queries are grouped according to their purpose and functionality.
+3
+Application
+3
+The main operations must be implemented: data entry, modification, and deletion.
+4
+Presentation
+1
+The presentation must reflect the background, objective, tasks, implementation tools, and conclusions. A video file may also be provided.
+

@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DeshiMula - Database Project Presentation</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Plus+Jakarta+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-primary: #0b0f19;
+      --bg-secondary: #131a2c;
+      --accent: #4f46e5;
+      --accent-gradient: linear-gradient(135deg, #6366f1 0%, #4f46e5 50%, #3730a3 100%);
+      --text-main: #f3f4f6;
+      --text-muted: #9ca3af;
+      --card-bg: rgba(255, 255, 255, 0.03);
+      --card-border: rgba(255, 255, 255, 0.08);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background-color: var(--bg-primary);
+      color: var(--text-main);
+      overflow: hidden;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    /* Slides Container */
+    .slides-container {
+      position: relative;
+      flex-grow: 1;
+      width: 100%;
+      height: 100%;
+    }
+
+    /* Single Slide Styles */
+    .slide {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      padding: 4rem 6rem;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.5s ease, transform 0.5s ease;
+      transform: scale(0.98);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .slide.active {
+      opacity: 1;
+      pointer-events: auto;
+      transform: scale(1);
+    }
+
+    /* Slide Content Typography */
+    h1 {
+      font-family: 'Outfit', sans-serif;
+      font-weight: 800;
+      font-size: 3.5rem;
+      line-height: 1.2;
+      background: linear-gradient(to right, #ffffff, #93c5fd, #a5b4fc);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 1.5rem;
+    }
+
+    h2 {
+      font-family: 'Outfit', sans-serif;
+      font-weight: 700;
+      font-size: 2.2rem;
+      color: #818cf8;
+      margin-bottom: 2rem;
+      border-left: 5px solid var(--accent);
+      padding-left: 1rem;
+    }
+
+    p {
+      font-size: 1.2rem;
+      line-height: 1.6;
+      color: var(--text-muted);
+      margin-bottom: 1.5rem;
+      max-width: 800px;
+    }
+
+    /* Grid Layouts */
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2.5rem;
+      align-items: center;
+      margin-top: 1rem;
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+      margin-top: 1rem;
+    }
+
+    /* Cards */
+    .card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 16px;
+      padding: 2rem;
+      transition: transform 0.3s ease, border-color 0.3s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+      border-color: rgba(99, 102, 241, 0.4);
+    }
+
+    .card h3 {
+      font-size: 1.4rem;
+      color: #f3f4f6;
+      margin-bottom: 0.75rem;
+      font-weight: 600;
+    }
+
+    .card p {
+      font-size: 1rem;
+      margin-bottom: 0;
+    }
+
+    /* Bullet lists */
+    ul {
+      list-style-position: inside;
+      margin-bottom: 1.5rem;
+    }
+
+    li {
+      font-size: 1.1rem;
+      margin-bottom: 0.75rem;
+      color: var(--text-main);
+      line-height: 1.5;
+    }
+
+    li strong {
+      color: #818cf8;
+    }
+
+    /* Code blocks */
+    pre {
+      background: rgba(0, 0, 0, 0.4);
+      padding: 1.5rem;
+      border-radius: 12px;
+      border: 1px solid var(--card-border);
+      overflow-x: auto;
+      font-family: 'Courier New', Courier, monospace;
+      color: #a5b4fc;
+      font-size: 0.95rem;
+    }
+
+    /* Highlight badge */
+    .badge {
+      display: inline-block;
+      padding: 0.25rem 0.75rem;
+      background: rgba(99, 102, 241, 0.15);
+      color: #a5b4fc;
+      border: 1px solid rgba(99, 102, 241, 0.3);
+      border-radius: 9999px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+    }
+
+    /* Footer and Controls */
+    footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.5rem 6rem;
+      background: var(--bg-secondary);
+      border-top: 1px solid var(--card-border);
+      z-index: 100;
+    }
+
+    .logo-container {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .logo-text {
+      font-family: 'Outfit', sans-serif;
+      font-weight: 800;
+      font-size: 1.4rem;
+      background: var(--accent-gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .slide-number {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      font-weight: 600;
+    }
+
+    .controls {
+      display: flex;
+      gap: 1rem;
+    }
+
+    button {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      color: var(--text-main);
+      padding: 0.75rem 1.25rem;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: all 0.2s ease;
+    }
+
+    button:hover {
+      background: var(--accent);
+      border-color: var(--accent);
+    }
+
+    /* Title Slide Specifics */
+    .slide-title-layout {
+      text-align: center;
+      align-items: center;
+    }
+
+    .slide-title-layout h1 {
+      font-size: 5rem;
+      margin-bottom: 1rem;
+    }
+
+    .author-info {
+      margin-top: 3rem;
+      border-top: 1px solid var(--card-border);
+      padding-top: 1.5rem;
+      width: 50%;
+    }
+
+    .author-info p {
+      margin-bottom: 0.5rem;
+      font-size: 1.1rem;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="slides-container">
+
+    <!-- Slide 1: Title -->
+    <div class="slide active slide-title-layout">
+      <div class="badge">DATABASE PRACTICE PROJECT</div>
+      <h1>DeshiMula Database System</h1>
+      <p>An Anonymous Employee Review & Rating Platform for the IT and Corporate Sector in Bangladesh</p>
+      <div class="author-info">
+        <p><strong>Developed by:</strong> Rahi Chowdhury</p>
+        <p><strong>Course:</strong> Database Practice</p>
+        <p><strong>Institution:</strong> Vilnius College / University of Applied Sciences</p>
+      </div>
+    </div>
+
+    <!-- Slide 2: Background -->
+    <div class="slide">
+      <h2>Project Background & Context</h2>
+      <div class="grid-2">
+        <div>
+          <p>The job market in Bangladesh lacks a transparent forum where employees can share honest feedback about their employers.</p>
+          <p>Issues such as salary delays, lack of increments, toxic work culture, nepotism, and micromanagement are common but rarely discussed publicly due to fear of retaliation.</p>
+          <p><strong>DeshiMula</strong> provides a secure, anonymous web platform for employees to post constructive, detailed reviews and rate companies, fostering accountability and helping job seekers make informed career decisions.</p>
+        </div>
+        <div class="card">
+          <h3>Target Application Domain</h3>
+          <ul>
+            <li><strong>Entities:</strong> Companies, Reviews, Comments, Users, Locations, and Industries.</li>
+            <li><strong>Interactivity:</strong> Upvotes/downvotes, reporting content, nested user discussions, and admin moderation.</li>
+            <li><strong>AI Utility:</strong> Real data seeding (extracting semantic context from a large dataset of employee comments).</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Slide 3: Objectives & Tasks -->
+    <div class="slide">
+      <h2>Objectives & Core Tasks</h2>
+      <div class="grid-3">
+        <div class="card">
+          <h3>1. Schema Design</h3>
+          <p>Construct a multi-table relational schema covering all requirements, resolving relationships, junctions, and constraints.</p>
+        </div>
+        <div class="card">
+          <h3>2. Normalization</h3>
+          <p>Apply database normalization rules up to Third Normal Form (3NF) to minimize data redundancy and prevent anomalies.</p>
+        </div>
+        <div class="card">
+          <h3>3. Implementation</h3>
+          <p>Develop a robust web application using Node.js, Next.js, and better-sqlite3 with server actions and a beautiful Tailwind CSS interface.</p>
+        </div>
+      </div>
+      <div class="card" style="margin-top: 2rem;">
+        <h3>Key Practice Requirements</h3>
+        <p style="font-size: 1.05rem; margin-bottom: 0;">At least 15 relational entities in the ER model. Seeding at least 100 records in <strong>each</strong> table using manual entries, raw SQL, and bulk AI transfers. Crafting and executing 30 analytical SQL queries.</p>
+      </div>
+    </div>
+
+    <!-- Slide 4: ER Model & Entities -->
+    <div class="slide">
+      <h2>Relational ER Model (15 Entities)</h2>
+      <div class="grid-2">
+        <div>
+          <p>The system utilizes exactly 15 entities to map the full lifecycle of employee reviews, comments, locations, and system auditing:</p>
+          <ul style="column-count: 2; gap: 1.5rem;">
+            <li><strong>users</strong> (accounts)</li>
+            <li><strong>companies</strong> (employers)</li>
+            <li><strong>reviews</strong> (employee posts)</li>
+            <li><strong>review_sentiments</strong></li>
+            <li><strong>comments</strong> (discussion)</li>
+            <li><strong>votes</strong> (helpful ratings)</li>
+            <li><strong>tags</strong> (keywords)</li>
+            <li><strong>review_tags</strong> (junction)</li>
+            <li><strong>industries</strong> (sectors)</li>
+            <li><strong>company_industries</strong></li>
+            <li><strong>company_locations</strong></li>
+            <li><strong>company_location_junction</strong></li>
+            <li><strong>reports</strong> (flagged posts)</li>
+            <li><strong>notifications</strong></li>
+            <li><strong>audit_logs</strong> (system logs)</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>Normalization Highlights (3NF)</h3>
+          <ul>
+            <li><strong>1NF:</strong> All attributes contain atomic values; composite arrays (like tags) are split into rows.</li>
+            <li><strong>2NF:</strong> Junction tables resolve many-to-many relationships (e.g. review tags), ensuring full dependency on primary keys.</li>
+            <li><strong>3NF:</strong> Transitive dependencies are removed. Sentiment labels are placed in `review_sentiments` and locations in `company_locations` instead of duplicates.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Slide 5: Data Entry & AI Seeding -->
+    <div class="slide">
+      <h2>Data Seeding & Import Strategy</h2>
+      <div class="grid-2">
+        <div>
+          <p>The practice required populating all 15 tables with at least 100 records each. We achieved this through three pathways:</p>
+          <ul>
+            <li><strong>1. Visual UI:</strong> Web forms for users to sign up, submit reviews, and post comments.</li>
+            <li><strong>2. SQL Insertion:</strong> DDL and DML scripts containing core seed structures for roles and industries.</li>
+            <li><strong>3. Bulk Data Transfer:</strong> A Python migration script parsing <code>raw.csv</code> containing 1,999 records.</li>
+            <li><strong>4. AI Data Generation:</strong> Random generation functions inside Python seeder simulating votes, reports, notifications, audit logs, and sentiments.</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>Seed Counts Verified</h3>
+          <ul style="font-size: 1rem;">
+            <li><strong>companies:</strong> 293 entities</li>
+            <li><strong>users:</strong> 120 user accounts</li>
+            <li><strong>reviews:</strong> 408 detailed reviews</li>
+            <li><strong>tags & locations:</strong> 100 each</li>
+            <li><strong>review_tags:</strong> 1,019 relations</li>
+            <li><strong>comments & votes:</strong> 150 comments, 300 votes</li>
+            <li><strong>logs & notifications:</strong> 150 each</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Slide 6: SQL Query Highlights -->
+    <div class="slide">
+      <h2>Analytical SQL Queries</h2>
+      <p>We developed and executed 30 comprehensive queries to test database integrity, join structures, and subqueries. Key queries include:</p>
+      <div class="grid-2">
+        <pre>
+-- Query 15: Companies with locations & industries
+SELECT c.name, 
+       GROUP_CONCAT(DISTINCT i.name) AS industries, 
+       GROUP_CONCAT(DISTINCT l.name) AS locations
+FROM companies c
+LEFT JOIN company_industries ci 
+     ON ci.company_id = c.id
+LEFT JOIN industries i 
+     ON i.id = ci.industry_id
+LEFT JOIN company_location_junction clj 
+     ON clj.company_id = c.id
+LEFT JOIN company_locations l 
+     ON l.id = clj.location_id
+GROUP BY c.id LIMIT 10;</pre>
+        <pre>
+-- Query 26: Companies with Positive Reviews
+-- and No Pending Reports (Correlated Subquery)
+SELECT c.name FROM companies c 
+WHERE EXISTS (
+  SELECT 1 FROM reviews r 
+  JOIN review_sentiments s ON s.id = r.sentiment_id
+  WHERE r.company_id = c.id AND s.name = 'Positive'
+) AND NOT EXISTS (
+  SELECT 1 FROM reports p 
+  JOIN reviews r ON r.id = p.review_id
+  WHERE r.company_id = c.id AND p.status = 'pending'
+) LIMIT 10;</pre>
+      </div>
+    </div>
+
+    <!-- Slide 7: Web Application Stack -->
+    <div class="slide">
+      <h2>Web Application Architecture</h2>
+      <div class="grid-2">
+        <div>
+          <p>DeshiMula is developed as a production-grade Web App:</p>
+          <ul>
+            <li><strong>Framework:</strong> Next.js 15 (React 18) with App Router.</li>
+            <li><strong>Database Engine:</strong> SQLite integrated with <code>better-sqlite3</code> for ultra-fast, zero-network-latency server queries.</li>
+            <li><strong>Styling:</strong> Tailwind CSS 3 for a modern, dark glassmorphism layout, featuring responsive cards, modals, and input fields.</li>
+            <li><strong>State & Auth:</strong> Cookie-based secure session tokens, password hashing, and role-based access checks (user vs. admin).</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>Core Modules</h3>
+          <ul style="font-size: 1rem;">
+            <li><strong>lib/db.ts:</strong> Singleton database connection manager wrapper.</li>
+            <li><strong>lib/actions.ts:</strong> Secure Server Actions for form submissions (register, login, submitReview, addComment, upvote/downvote).</li>
+            <li><strong>components/review-card.tsx:</strong> Reusable cards representing review statistics and sentiment badges.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Slide 8: Conclusions -->
+    <div class="slide">
+      <h2>Conclusions & Recommendations</h2>
+      <div class="grid-2">
+        <div class="card">
+          <h3>Key Conclusions</h3>
+          <ul>
+            <li>Implemented a highly normalized relational database schema (15 entities, 3NF).</li>
+            <li>Seeded the database with 100+ high-quality records per table using a unified CSV migration script.</li>
+            <li>Successfully executed 30 complex analytical queries, validating correctness of the indexes, joins, and triggers.</li>
+            <li>Created a user-friendly, responsive interface that operates cleanly in any educational computer lab.</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>Future Recommendations</h3>
+          <ul>
+            <li><strong>AI Sentiment Auto-Tagging:</strong> Integrate HuggingFace or OpenAI to scan incoming review text and auto-assign sentiment and tag categories.</li>
+            <li><strong>Data Pagination:</strong> Implement cursor-based pagination for reviews to scale with larger database dumps.</li>
+            <li><strong>Notifications Engine:</strong> Switch from polling to WebSockets for real-time moderator flag alerts.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <footer>
+    <div class="logo-container">
+      <span class="logo-text">DeshiMula</span>
+    </div>
+    <div class="slide-number" id="slide-num">Slide 1 of 8</div>
+    <div class="controls">
+      <button onclick="prevSlide()">Previous (◀)</button>
+      <button onclick="nextSlide()">Next (▶)</button>
+    </div>
+  </footer>
+
+  <script>
+    let currentSlide = 0;
+    const slides = document.querySelectorAll('.slide');
+
+    function showSlide(index) {
+      slides.forEach((slide, i) => {
+        slide.classList.toggle('active', i === index);
+      });
+      document.getElementById('slide-num').innerText = `Slide ${index + 1} of ${slides.length}`;
+    }
+
+    function nextSlide() {
+      currentSlide = (currentSlide + 1) % slides.length;
+      showSlide(currentSlide);
+    }
+
+    function prevSlide() {
+      currentSlide = (currentSlide - 1 + slides.length) % slides.length;
+      showSlide(currentSlide);
+    }
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'Enter') {
+        nextSlide();
+      } else if (e.key === 'ArrowLeft') {
+        prevSlide();
+      }
+    });
+  </script>
+</body>
+</html>

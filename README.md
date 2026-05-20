@@ -1,5 +1,7 @@
 # DeshiMula — User Manual & Installation Guide
 
+### 🌐 Live Production Deployment: [https://deshimula-cyan.vercel.app](https://deshimula-cyan.vercel.app)
+
 Welcome to **DeshiMula**, a platform designed for employees in Bangladesh to share anonymous reviews and ratings about companies. This manual guides you through setting up, configuring, launching, and using the application.
 
 ---

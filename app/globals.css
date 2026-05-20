@@ -8,7 +8,9 @@ html {
 
 body {
   min-height: 100vh;
-  background: #f8fafc;
+  background:
+    radial-gradient(circle at top, rgba(50, 152, 193, 0.14), transparent 28%),
+    linear-gradient(180deg, #eff8ff 0%, #f8fafc 35%, #eef2ff 100%);
   color: #0f172a;
   font-family:
     Inter,
@@ -33,6 +35,17 @@ input,
 textarea,
 select {
   font: inherit;
+}
+
+::selection {
+  background: rgba(50, 152, 193, 0.24);
+  color: #0f172a;
+}
+
+.glass-card {
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(18px);
+  box-shadow: 0 24px 60px rgba(15, 23, 42, 0.08);
 }
 
 ::-webkit-scrollbar {

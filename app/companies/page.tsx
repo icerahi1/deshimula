@@ -3,9 +3,7 @@ import { all } from "@/lib/db";
 import Link from "next/link";
 
 export default async function CompaniesPage(props: any) {
-  const searchParams:
-    | Record<string, string | string[] | undefined>
-    | undefined = props.searchParams;
+  const searchParams = await props.searchParams;
   const query = Array.isArray(searchParams?.q)
     ? searchParams.q[0]
     : searchParams?.q || "";
@@ -41,7 +39,7 @@ export default async function CompaniesPage(props: any) {
 
   return (
     <div className="space-y-10">
-      <section className="rounded-3xl border border-slate-200 bg-white p-8 shadow-sm">
+      <section className="rounded-3xl border border-slate-200/60 glass-card p-8 shadow-sm">
         <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
           <div>
             <h1 className="text-3xl font-semibold text-slate-900">
@@ -58,7 +56,11 @@ export default async function CompaniesPage(props: any) {
             Submit a review
           </Link>
         </div>
-        <form className="mt-8 grid gap-4 md:grid-cols-[1fr_auto]">
+        <form
+          action="/companies"
+          method="get"
+          className="mt-8 grid gap-4 md:grid-cols-[1fr_auto]"
+        >
           <input
             name="q"
             defaultValue={query}

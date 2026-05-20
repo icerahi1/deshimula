@@ -9,9 +9,7 @@ function takeSummary(text: string) {
 }
 
 export default async function HomePage(props: any) {
-  const searchParams:
-    | Record<string, string | string[] | undefined>
-    | undefined = props.searchParams;
+  const searchParams = await props.searchParams;
   const currentUser = await getCurrentUser();
   const query = Array.isArray(searchParams?.q)
     ? searchParams.q[0]
@@ -41,7 +39,7 @@ export default async function HomePage(props: any) {
 
   return (
     <div className="space-y-10">
-      <section className="rounded-3xl border border-slate-200 bg-white p-8 shadow-sm">
+      <section className="rounded-3xl border border-slate-200/60 glass-card p-8 shadow-sm">
         <div className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
           <div>
             <p className="text-sm uppercase tracking-[0.24em] text-brand-600">
@@ -58,13 +56,13 @@ export default async function HomePage(props: any) {
           <div className="flex flex-col gap-3 sm:flex-row">
             <Link
               href="/companies"
-              className="inline-flex items-center justify-center rounded-full bg-brand-600 px-5 py-3 text-sm font-medium text-white transition hover:bg-brand-700"
+              className="inline-flex items-center justify-center rounded-full bg-brand-600 px-6 py-3 text-sm font-semibold text-white transition duration-200 hover:bg-brand-700"
             >
               Browse companies
             </Link>
             <Link
               href="/submit"
-              className="inline-flex items-center justify-center rounded-full border border-slate-200 bg-white px-5 py-3 text-sm font-medium text-slate-900 transition hover:border-brand-300"
+              className="inline-flex items-center justify-center rounded-full border border-slate-200 bg-white px-6 py-3 text-sm font-semibold text-slate-900 transition duration-200 hover:border-brand-300 hover:bg-slate-50"
             >
               Write a review
             </Link>
@@ -175,7 +173,7 @@ export default async function HomePage(props: any) {
                 href="/review/1"
                 className="text-sm text-brand-600 hover:underline"
               >
-                View a review
+                Browse reviews
               </Link>
             </div>
             <div className="grid gap-4 md:grid-cols-2">

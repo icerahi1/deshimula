@@ -3,7 +3,7 @@ import Link from "next/link";
 
 export default async function LoginPage() {
   return (
-    <div className="max-w-2xl rounded-3xl border border-slate-200 bg-white p-10 shadow-sm mx-auto">
+    <div className="glass-card mx-auto max-w-2xl rounded-[2rem] border border-slate-200 p-10">
       <div className="space-y-4">
         <h1 className="text-3xl font-semibold text-slate-900">Login</h1>
         <p className="text-slate-600">Log in with your email and password.</p>

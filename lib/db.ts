@@ -2,10 +2,21 @@ import Database from "better-sqlite3";
 import fs from "fs";
 import path from "path";
 
-const dbPath = path.join(process.cwd(), "data", "deshimula.db");
-const dirPath = path.dirname(dbPath);
-if (!fs.existsSync(dirPath)) {
-  fs.mkdirSync(dirPath, { recursive: true });
+const isVercel = process.env.VERCEL === "1";
+const sourcePath = path.join(process.cwd(), "data", "deshimula.db");
+const dbPath = isVercel
+  ? path.join("/tmp", "deshimula.db")
+  : sourcePath;
+
+if (isVercel && !fs.existsSync(dbPath)) {
+  if (fs.existsSync(sourcePath)) {
+    fs.copyFileSync(sourcePath, dbPath);
+  }
+} else if (!isVercel) {
+  const dirPath = path.dirname(dbPath);
+  if (!fs.existsSync(dirPath)) {
+    fs.mkdirSync(dirPath, { recursive: true });
+  }
 }
 
 const db = new Database(dbPath, { verbose: undefined });

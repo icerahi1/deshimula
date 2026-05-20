@@ -8,7 +8,7 @@ interface CompanyPageProps {
 }
 
 export default async function CompanyDetailPage(props: any) {
-  const params: { slug: string } = props.params;
+  const params = await props.params;
   const currentUser = await getCurrentUser();
   const company = get(
     `SELECT c.*, GROUP_CONCAT(i.name, ', ') AS industries, GROUP_CONCAT(l.name, ', ') AS locations
@@ -55,7 +55,7 @@ export default async function CompanyDetailPage(props: any) {
 
   return (
     <div className="space-y-8">
-      <section className="rounded-3xl border border-slate-200 bg-white p-8 shadow-sm">
+      <section className="rounded-3xl border border-slate-200/60 glass-card p-8 shadow-sm">
         <div className="flex flex-col gap-6 lg:flex-row lg:justify-between lg:items-start">
           <div className="max-w-3xl">
             <p className="text-sm uppercase tracking-[0.24em] text-brand-600">
@@ -118,7 +118,11 @@ export default async function CompanyDetailPage(props: any) {
                   <h3 className="text-lg font-semibold text-slate-900">
                     {review.title}
                   </h3>
-                  <span className="rounded-full bg-slate-100 px-3 py-1 text-xs font-semibold uppercase tracking-[0.16em] text-slate-700">
+                  <span className={`rounded-full px-3 py-1 text-xs font-semibold uppercase tracking-[0.16em] border ${
+                    review.sentiment === "Positive" ? "bg-emerald-50 text-emerald-700 border-emerald-200" :
+                    review.sentiment === "Negative" ? "bg-rose-50 text-rose-700 border-rose-200" :
+                    "bg-amber-50 text-amber-700 border-amber-200"
+                  }`}>
                     {review.sentiment}
                   </span>
                 </div>

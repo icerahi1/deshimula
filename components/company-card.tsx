@@ -21,7 +21,7 @@ export function CompanyCard({
   return (
     <Link
       href={`/company/${slug}`}
-      className="group block overflow-hidden rounded-3xl border border-slate-200 bg-white p-6 transition hover:-translate-y-0.5 hover:border-brand-300"
+      className="group block overflow-hidden rounded-3xl border border-slate-200 bg-white p-6 transition duration-300 hover:-translate-y-0.5 hover:border-brand-300 hover:shadow-xl"
     >
       <div className="flex items-center justify-between gap-4">
         <div>
